@@ -31,11 +31,11 @@ else{
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Add to cart</title>
   </head>
   <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="home.php">Clothify</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+  <a class="navbar-brand font-weight-bold" href="home.php">Clothify</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -43,16 +43,16 @@ else{
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" id="home" >Home </a>
+        <a class="nav-link" id="home" > |&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;|</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" id="men">Men <span class="sr-only">(current)</span></a>
+        <a class="nav-link" id="men" > Men &nbsp;&nbsp;&nbsp;|<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" id="women">Women <span class="sr-only">(current)</span></a>
+        <a class="nav-link" id="women" >  Women &nbsp;&nbsp;&nbsp;|<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" id="your_cart" href="your_cart.php">Your cart <span class="sr-only">(current)</span></a>
+        <a class="nav-link" id="your_cart" href="your_cart.php"> Your cart <span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" action="search.php">
@@ -62,6 +62,7 @@ else{
     <a href="logout.php" class="mx-2"><button type="button" class="btn btn-danger">Logout</button></a>
   </div>
 </nav>
+
 <div id="main">
 <h2 style="text-decoration:underline; text-align:center; margin-top:20px;">Your Cart</h2>
 <?php
@@ -74,6 +75,8 @@ else{
       $conn = new mysqli($servername, $username, $password,"clothify_php");
       
       $result=mysqli_query($conn,$query);
+      if (mysqli_num_rows($result) > 0) {
+    
       while($row = mysqli_fetch_assoc($result)){?>
         <div class="container mt-5" >
         <div class="card flex-row">
@@ -92,7 +95,18 @@ else{
   </div>
 </div><?php
      }
+
     ?>
+    <div class="text-center my-3">
+    <a href="generateBill.php"><button type="button" class="btn btn-primary" >Place Order</button></a>
+</div>
+<?php }
+else{
+  ?>
+  <p class="text-justify">Your cart is Empty</p>
+  <?php
+}
+?>
    </div>
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -116,9 +130,9 @@ else{
                 $('#main').html(data);
                 });
             });
-            $('.remove').click(function(){
-                alert("Product removed from Cart Successfully..");
-                });
+            // $('.remove').click(function(){
+            //     alert("Product removed from Cart Successfully..");
+            //     });
             $('.buy_now').click(function(){
                 alert("Your Order has been placed Successfully..");
                 });

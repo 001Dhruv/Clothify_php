@@ -9,8 +9,8 @@
     $result=mysqli_query($conn,$query);
     $row=mysqli_fetch_assoc($result);
     if($row!=null){
-        if($row['user_id']==$user_id){
-            if($row['password']==$password){
+        if($row['user_id']===$user_id){
+            if($row['password']===$password){
                 session_start();
                 $_SESSION['user_id']=$row['user_id'];
                 $_SESSION['contact']=$row['contact'];
